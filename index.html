@@ -2,57 +2,69 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Security Scan Result</title>
+<title>Cyber Security Scan Demo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(160deg, #020024, #090979, #000);
-    color: #e6e6e6;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: radial-gradient(circle at top, #0a0f1f, #000);
+    color: #e0e0e0;
 }
+
 .container {
     max-width: 900px;
     margin: auto;
     padding: 50px 20px;
 }
+
 .panel {
-    background: rgba(0,0,0,0.6);
-    border: 1px solid rgba(0,255,255,0.2);
+    background: rgba(0,0,0,0.65);
+    border: 1px solid rgba(0,255,255,0.25);
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 0 60px rgba(0,255,255,0.15);
+    box-shadow: 0 0 50px rgba(0,255,255,0.15);
 }
+
 h1 {
     text-align: center;
     color: #00ffff;
     letter-spacing: 2px;
+    margin-bottom: 10px;
 }
-.scan {
+
+.subtitle {
     text-align: center;
+    opacity: 0.7;
     margin-bottom: 30px;
-    opacity: 0.8;
 }
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
     gap: 15px;
 }
+
 .box {
     background: rgba(255,255,255,0.05);
     border-left: 3px solid #00ffff;
     padding: 15px;
     border-radius: 10px;
 }
+
 .label {
     font-size: 12px;
     opacity: 0.6;
 }
+
 .value {
-    margin-top: 5px;
+    margin-top: 6px;
+    font-weight: bold;
+    color: #00ffff;
     word-break: break-word;
 }
+
 .warning {
     margin-top: 30px;
     padding: 20px;
@@ -61,11 +73,22 @@ h1 {
     border-radius: 12px;
     text-align: center;
 }
+
 .footer {
     margin-top: 30px;
     text-align: center;
     font-size: 13px;
     opacity: 0.6;
+}
+
+/* Animation optionnelle pour rendre le scan plus “alive” */
+@keyframes blink {
+  0%, 50%, 100% {opacity:1;}
+  25%, 75% {opacity:0.3;}
+}
+.scanning {
+    color: #ff0;
+    animation: blink 1s infinite;
 }
 </style>
 </head>
@@ -74,44 +97,59 @@ h1 {
 <div class="container">
 <div class="panel">
 
-<h1>Device Scan Complete</h1>
-<div class="scan">Analyzing browser environment…</div>
+<h1>Device Scan</h1>
+<div class="subtitle scanning">Scanning device...</div>
 
 <div class="grid">
-    <div class="box"><div class="label">Browser</div><div id="browser" class="value"></div></div>
-    <div class="box"><div class="label">Operating System</div><div id="os" class="value"></div></div>
-    <div class="box"><div class="label">Device Type</div><div id="device" class="value"></div></div>
-    <div class="box"><div class="label">Screen Resolution</div><div id="screen" class="value"></div></div>
-    <div class="box"><div class="label">Language</div><div id="lang" class="value"></div></div>
-    <div class="box"><div class="label">Timezone</div><div id="tz" class="value"></div></div>
-    <div class="box"><div class="label">Local Time</div><div id="time" class="value"></div></div>
-    <div class="box"><div class="label">IP Address</div><div class="value">Hidden (server-side)</div></div>
+    <div class="box"><div class="label">Browser</div><div id="browser" class="value">Scanning...</div></div>
+    <div class="box"><div class="label">Operating System</div><div id="os" class="value">Scanning...</div></div>
+    <div class="box"><div class="label">Device Type</div><div id="device" class="value">Scanning...</div></div>
+    <div class="box"><div class="label">Screen Resolution</div><div id="screen" class="value">Scanning...</div></div>
+    <div class="box"><div class="label">Language</div><div id="language" class="value">Scanning...</div></div>
+    <div class="box"><div class="label">Timezone</div><div id="timezone" class="value">Scanning...</div></div>
+    <div class="box"><div class="label">Local Time</div><div id="time" class="value">Scanning...</div></div>
+    <div class="box"><div class="label">IP Address</div><div id="ip" class="value">Scanning...</div></div>
 </div>
 
 <div class="warning">
-⚠️ This data was accessible immediately after scanning the QR code.<br>
-A malicious page could silently fingerprint you.<br><br>
-<strong>QR codes are links. Treat them like unknown URLs.</strong>
+⚠️ This is a <strong>simulation only</strong>. No real personal data is collected.<br>
+A real malicious page could fingerprint your device.
 </div>
 
 <div class="footer">
-Cyber Awareness Project — Educational Demonstration
+Cyber Awareness Tunisia — Educational Demo
 </div>
 
 </div>
 </div>
 
 <script>
-const ua = navigator.userAgent;
-document.getElementById("browser").innerText = ua;
-document.getElementById("os").innerText = navigator.platform;
-document.getElementById("device").innerText =
-    /Mobi|Android/i.test(ua) ? "Mobile" : "Desktop";
-document.getElementById("screen").innerText =
-    screen.width + " x " + screen.height;
-document.getElementById("lang").innerText = navigator.language;
-document.getElementById("tz").innerText = Intl.DateTimeFormat().resolvedOptions().timeZone;
-document.getElementById("time").innerText = new Date().toString();
+// Fonction qui simule le scan des infos
+function startScan() {
+    const simulatedData = {
+        browser: "Chrome 121.0 (64-bit)",
+        os: "Windows 11",
+        device: "Desktop",
+        screen: "1920 x 1080",
+        language: "en-US",
+        timezone: "Africa/Tunis",
+        time: new Date().toLocaleString(),
+        ip: "102.158.44.23"
+    };
+
+    let delay = 500;
+    for (const key in simulatedData) {
+        setTimeout(() => {
+            document.getElementById(key).innerText = simulatedData[key];
+        }, delay);
+        delay += 700; // délai entre chaque donnée pour l’effet “scan”
+    }
+}
+
+// Lancer le scan automatiquement au chargement
+window.onload = () => {
+    setTimeout(startScan, 1000);
+};
 </script>
 
 </body>
