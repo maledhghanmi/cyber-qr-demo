@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Security Scan Result</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(160deg, #020024, #090979, #000);
+    color: #e6e6e6;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 50px 20px;
+}
+.panel {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,255,255,0.2);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 60px rgba(0,255,255,0.15);
+}
+h1 {
+    text-align: center;
+    color: #00ffff;
+    letter-spacing: 2px;
+}
+.scan {
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 15px;
+}
+.box {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid #00ffff;
+    padding: 15px;
+    border-radius: 10px;
+}
+.label {
+    font-size: 12px;
+    opacity: 0.6;
+}
+.value {
+    margin-top: 5px;
+    word-break: break-word;
+}
+.warning {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255,0,0,0.12);
+    border: 1px solid rgba(255,0,0,0.4);
+    border-radius: 12px;
+    text-align: center;
+}
+.footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="panel">
+
+<h1>Device Scan Complete</h1>
+<div class="scan">Analyzing browser environment…</div>
+
+<div class="grid">
+    <div class="box"><div class="label">Browser</div><div id="browser" class="value"></div></div>
+    <div class="box"><div class="label">Operating System</div><div id="os" class="value"></div></div>
+    <div class="box"><div class="label">Device Type</div><div id="device" class="value"></div></div>
+    <div class="box"><div class="label">Screen Resolution</div><div id="screen" class="value"></div></div>
+    <div class="box"><div class="label">Language</div><div id="lang" class="value"></div></div>
+    <div class="box"><div class="label">Timezone</div><div id="tz" class="value"></div></div>
+    <div class="box"><div class="label">Local Time</div><div id="time" class="value"></div></div>
+    <div class="box"><div class="label">IP Address</div><div class="value">Hidden (server-side)</div></div>
+</div>
+
+<div class="warning">
+⚠️ This data was accessible immediately after scanning the QR code.<br>
+A malicious page could silently fingerprint you.<br><br>
+<strong>QR codes are links. Treat them like unknown URLs.</strong>
+</div>
+
+<div class="footer">
+Cyber Awareness Project — Educational Demonstration
+</div>
+
+</div>
+</div>
+
+<script>
+const ua = navigator.userAgent;
+document.getElementById("browser").innerText = ua;
+document.getElementById("os").innerText = navigator.platform;
+document.getElementById("device").innerText =
+    /Mobi|Android/i.test(ua) ? "Mobile" : "Desktop";
+document.getElementById("screen").innerText =
+    screen.width + " x " + screen.height;
+document.getElementById("lang").innerText = navigator.language;
+document.getElementById("tz").innerText = Intl.DateTimeFormat().resolvedOptions().timeZone;
+document.getElementById("time").innerText = new Date().toString();
+</script>
+
+</body>
+</html>
